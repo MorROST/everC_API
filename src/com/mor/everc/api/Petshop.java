@@ -14,16 +14,18 @@ public class Petshop {
 public final String URI = "https://petstore.swagger.io/v2/";
 
     public JsonObject createPet (Pet pet){
-        Response response = postRestAction(convertPet(pet), "pet");
-        return new Gson().fromJson(response.getBody().asString(), JsonObject.class);
+        System.out.println("We'll going to create your pet");
+        Response response = postRestAction(convertPet(pet), "pet");  //Using extract method, transfer the 'endpoint' as a parameter
+        return new Gson().fromJson(response.getBody().asString(), JsonObject.class);  //
     }
     public JsonObject getSinglePet(String id){
+        System.out.println("Going to brings the pet: " + id + " from the server");
         Response response = getRestActionById("pet", id);
         return new Gson().fromJson(response.getBody().asString(), JsonObject.class);
     }
 
 
-    public JsonObject convertPet(Pet pet){
+    public JsonObject convertPet(Pet pet){   //convert pet structure to JsonObject
         String jsonBody = new GsonBuilder().create().toJson(pet);
         return new Gson().fromJson(jsonBody, JsonObject.class);
     }
@@ -40,6 +42,8 @@ public final String URI = "https://petstore.swagger.io/v2/";
                 .body(body.toString())
                 .post();
     }
+
+    //TODO: should adding a 'PUT' scenario to update utility
 
     private Response getRestActionById(String endpoint,String id) {
         getRestAssuredConf(endpoint);

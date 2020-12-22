@@ -28,8 +28,9 @@ public class MorROST {
                 .withStatus("available");
 
         JsonObject response = new Petshop().createPet(myPet);
-        System.out.println("Created");
         printResponse(response);
+        //TODO: should convert back to 'Pet' and store the result in a storge solution (DB || yaml || txt) and validate
+        // that my pet is up to date
     }
 
     @Test
