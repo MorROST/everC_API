@@ -3,10 +3,7 @@ package test;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.mor.everc.api.Category;
-import com.mor.everc.api.Pet;
-import com.mor.everc.api.Petshop;
-import com.mor.everc.api.Tag;
+import com.mor.everc.api.*;
 import org.testng.annotations.Test;
 import java.util.Arrays;
 
@@ -28,7 +25,7 @@ public class MorROST {
                 .withStatus("available");
 
         JsonObject response = new Petshop().createPet(myPet);
-        printResponse(response);
+        Utility.printResponse(response);
         //TODO: should convert back to 'Pet' and store the result in a storge solution (DB || yaml || txt) and validate
         // that my pet is up to date
     }
@@ -36,13 +33,8 @@ public class MorROST {
     @Test
     public void testGetPet(){
         JsonObject response = new Petshop().getSinglePet("301630");
-        printResponse(response);
+        Utility.printResponse(response);
+        Pet petReceived = Utility.convertPetFromResponse(response);
     }
 
-    private void printResponse(JsonObject response) {
-        if(response != null){
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            System.out.println(gson.toJson(response));
-        }
-    }
 }

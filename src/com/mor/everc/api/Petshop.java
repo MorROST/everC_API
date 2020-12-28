@@ -16,7 +16,8 @@ public class Petshop {
     public JsonObject createPet(Pet pet) {
         System.out.println("We'll going to create your pet");
         Response response = postRestAction(convertPet(pet), "pet");  //Using extract method, transfer the 'endpoint' as a parameter
-        return getJsonObject(response.getBody().asString());  //
+        System.out.println("Your " + pet.getName() + " pet successfully created:");
+        return getJsonObject(response.getBody().asString());
     }
 
     public JsonObject getSinglePet(String id) {
